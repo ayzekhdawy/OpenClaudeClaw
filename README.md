@@ -6,12 +6,14 @@
 
 - **42 Tools** — Bash, Read, Write, Edit, Glob, Grep, LSP, REPL, Task, MCP, Plan Mode, Worktree and more
 - **Harness Context** — Automatic SOUL, MEMORY, USER merging
+- **Esra Runtime** — 5-step reasoning chain (Dalio process)
 - **State Management** — Persistent state in `.harness/` directory
 - **Policy Engine** — Tool-based permissions + approval flow
 - **Cache System** — 60 second TTL for fast context analysis
 - **Event Bus** — Async event handling
 - **Agent Registry** — Sub-agent tracking + steering
 - **Skill Registry** — Skill creation with wizard mode
+- **Self-Evolution** — Automatic error logging + pattern promotion
 
 ## Installation
 
@@ -96,6 +98,7 @@ openclaudeclaw/
 │   └── openclaudeclaw/
 │       ├── __init__.py
 │       ├── runtime.py          # HarnessRuntime
+│       ├── esra_runtime.py     # Advanced reasoning (5-step chain)
 │       ├── tool_pool.py        # 42 tool registry
 │       ├── context_builder.py  # Context merge
 │       ├── policy_engine.py    # Permission system
@@ -106,10 +109,17 @@ openclaudeclaw/
 │       ├── skills.py           # Skill registry
 │       ├── schedule.py         # Cron store
 │       └── tools/              # 42 tool implementations
-│           ├── core_tools.py
-│           ├── extended_tools.py
-│           ├── advanced_tools.py
-│           └── ...
+├── docs/
+│   ├── ARCHITECTURE.md         # System architecture
+│   ├── PHILOSOPHY.md           # Decision-making framework
+│   ├── ORCHESTRATION.md        # Multi-agent patterns
+│   ├── SELF_EVOLUTION.md       # Learning system
+│   └── USAGE.md                # Usage guide
+├── examples/
+│   ├── README.md
+│   ├── example1_cargo_research.py      # Reasoning chain demo
+│   ├── example2_multi_agent.py         # Orchestration demo
+│   └── example3_self_correction.py     # Learning demo
 ├── install.py                  # Installation wizard
 ├── README.md
 ├── LICENSE
