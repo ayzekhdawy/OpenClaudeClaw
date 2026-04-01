@@ -1,0 +1,4 @@
+openclaudeclaw>=1.0.0
+pathlib
+jsonschema
+pyyaml
