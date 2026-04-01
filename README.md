@@ -1,151 +1,215 @@
 # OpenClaudeClaw
 
-**Advanced harness system for OpenClaw** — 42 tools, state management, context builder, policy engine.
+**Advanced Harness System for OpenClaw**
 
-## Features
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
+[![Tools: 42](https://img.shields.io/badge/tools-42-green.svg)](docs/USAGE.md)
 
-- **42 Tools** — Bash, Read, Write, Edit, Glob, Grep, LSP, REPL, Task, MCP, Plan Mode, Worktree and more
-- **Harness Context** — Automatic SOUL, MEMORY, USER merging
-- **Esra Runtime** — 5-step reasoning chain (Dalio process)
-- **State Management** — Persistent state in `.harness/` directory
-- **Policy Engine** — Tool-based permissions + approval flow
-- **Cache System** — 60 second TTL for fast context analysis
-- **Event Bus** — Async event handling
-- **Agent Registry** — Sub-agent tracking + steering
-- **Skill Registry** — Skill creation with wizard mode
-- **Self-Evolution** — Automatic error logging + pattern promotion
+OpenClaudeClaw is a production-ready harness system for OpenClaw, providing 42 tools, advanced reasoning capabilities, and comprehensive multi-agent orchestration patterns.
+
+---
+
+## What It Provides
+
+- **42 Production Tools** — File operations, web search, LSP code intelligence, REPL, Git worktrees, MCP integration
+- **5-Step Reasoning Chain** — Dalio-based decision framework (Define → Decompose → Research → Synthesize → Validate)
+- **Multi-Agent Orchestration** — Coordinate coding agents, research agents, and workflow executors
+- **Self-Evolution System** — Automatic error logging, pattern detection, behavioral updates
+- **Context Management** — Intelligent merging of persona, memory, and user context
+- **Policy Engine** — Tool-level permissions with approval workflows
+- **State Persistence** — Survives restarts via `.harness/` directory
+
+---
 
 ## Installation
 
 ```bash
-# Run OpenClaudeClaw installation wizard
+git clone https://github.com/ayzekhdawy/OpenClaudeClaw.git
+cd OpenClaudeClaw
 python3 install.py
 ```
 
-The installation wizard will ask you:
-- Which tools do you want to install? (Core/Extended/All)
-- Where should the state directory be? (default: `.harness/`)
-- Should Policy Engine be enabled?
-- Should Cache System be enabled?
+The interactive wizard guides you through:
+- Tool selection (Core only / Core+Extended / Full 42-tool install)
+- State directory configuration
+- Policy engine setup
+- Cache system preferences
+
+---
 
 ## Quick Start
+
+### Basic Usage
 
 ```python
 from openclaudeclaw import HarnessRuntime, get_tool_pool
 
-# Create runtime
+# Initialize runtime
 runtime = HarnessRuntime()
-
-# Access tool pool
 pool = get_tool_pool()
 
-# Run a tool
-result = pool.execute("Bash", {"command": "echo 'Hello World'"})
+# Execute a tool
+result = pool.execute("Bash", {"command": "ls -la"})
 print(result.output)
+```
 
-# Use context builder
+### Advanced Reasoning (Esra Runtime)
+
+```python
+from openclaudeclaw.esra_runtime import create_esra_runtime
+
+runtime = create_esra_runtime()
+result = runtime.execute_with_reasoning(
+    "Research cargo prices for glass products in Turkey"
+)
+
+# Access full reasoning chain
+for step in result.reasoning_chain:
+    print(f"[{step.name}] {step.output}")
+```
+
+### Context Building
+
+```python
 from openclaudeclaw.context_builder import build_context
-ctx = build_context("Research cargo prices for Flech")
-print(ctx.full_prompt)
+
+ctx = build_context("Analyze Q1 financial data")
+print(ctx.full_prompt)  # Merged SOUL + MEMORY + USER context
 ```
-
-## Tool Categories
-
-### Core Tools (8)
-- `Bash` — Run shell commands
-- `Read` — Read files
-- `Write` — Write files
-- `Edit` — Edit files
-- `Glob` — Find files (pattern)
-- `Grep` — Search content
-- `Think` — Thought notes
-- `Task` — Task management
-
-### Extended Tools (19)
-- `TodoWrite` — Todo list management
-- `WebFetch` — Fetch web pages
-- `WebSearch` — Web search (Brave API)
-- `Brief` — Send message to user
-- `SendMessage` — Send message (webhook)
-- `TaskCreate/Get/Update/Stop` — Task CRUD
-- `AskUserQuestion` — Multi-question UI
-- `ToolSearch` — Search tools
-- `Sleep` — Wait (ms)
-- `Config` — Configuration read/write
-- `NotebookEdit` — Jupyter notebook editor
-- `ListMcpResources` — MCP server list
-- `ReadMcpResource` — MCP resource reader
-- `SyntheticOutput` — Template-based output
-
-### Advanced Tools (15)
-- `LSP` — Code intelligence (goto definition, references, symbols)
-- `REPL` — Interactive Python shell
-- `EnterPlanMode/ExitPlanMode/UpdatePlan/PlanStatus` — Planning system
-- `EnterWorktree/ExitWorktree/WorktreeList` — Git worktree management
-- `Skill` — Skill registry + wizard mode
-- `AnswerQuestion` — Question answering
-- `Agent` — Sub-agent management
-- `Runtime` — Runtime status
-- `AnalyzeContext` — Context analysis + cache
-- `MCP` — MCP wrapper
-- `Schedule` — Cron job management
-
-## Project Structure
-
-```
-openclaudeclaw/
-├── src/
-│   └── openclaudeclaw/
-│       ├── __init__.py
-│       ├── runtime.py          # HarnessRuntime
-│       ├── esra_runtime.py     # Advanced reasoning (5-step chain)
-│       ├── tool_pool.py        # 42 tool registry
-│       ├── context_builder.py  # Context merge
-│       ├── policy_engine.py    # Permission system
-│       ├── models.py           # Data models
-│       ├── state.py            # State management
-│       ├── event_bus.py        # Event handling
-│       ├── agent_registry.py   # Sub-agent tracking
-│       ├── skills.py           # Skill registry
-│       ├── schedule.py         # Cron store
-│       └── tools/              # 42 tool implementations
-├── docs/
-│   ├── ARCHITECTURE.md         # System architecture
-│   ├── PHILOSOPHY.md           # Decision-making framework
-│   ├── ORCHESTRATION.md        # Multi-agent patterns
-│   ├── SELF_EVOLUTION.md       # Learning system
-│   └── USAGE.md                # Usage guide
-├── examples/
-│   ├── README.md
-│   ├── example1_cargo_research.py      # Reasoning chain demo
-│   ├── example2_multi_agent.py         # Orchestration demo
-│   └── example3_self_correction.py     # Learning demo
-├── install.py                  # Installation wizard
-├── README.md
-├── LICENSE
-└── requirements.txt
-```
-
-## License
-
-MIT License — See `LICENSE` file for details.
-
-## Contributing
-
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Open a Pull Request
-
-## Support
-
-- GitHub Issues: [Report bug or request feature]
-- Discord: [OpenClaw community]
-- Documentation: `docs/` directory
 
 ---
 
-**Developer:** Ayzekdiolar  
+## Tool Categories
+
+| Category | Count | Examples |
+|----------|-------|----------|
+| **Core** | 8 | Bash, Read, Write, Edit, Glob, Grep, Think, Task |
+| **Extended** | 19 | WebSearch, WebFetch, TodoWrite, Brief, Task CRUD, MCP Resources |
+| **Advanced** | 15 | LSP, REPL, Plan Mode (4), Worktree (3), Skill Registry |
+
+**Full tool list:** [`docs/USAGE.md`](docs/USAGE.md)
+
+---
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | System architecture, component diagrams, performance characteristics |
+| [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md) | Decision-making framework (Dalio, Laloux, Kilani integration) |
+| [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) | Multi-agent patterns, task routing, failure handling |
+| [`docs/SELF_EVOLUTION.md`](docs/SELF_EVOLUTION.md) | Error classification, learning pipeline, behavior updates |
+| [`docs/USAGE.md`](docs/USAGE.md) | Complete tool reference with examples |
+
+---
+
+## Examples
+
+Three comprehensive examples demonstrate real-world usage:
+
+### Example 1: Cargo Price Research
+Full 5-step reasoning chain with web search coordination.
+
+```bash
+python3 examples/example1_cargo_research.py
+```
+
+### Example 2: Multi-Agent Orchestration
+Decompose complex tasks, route to appropriate agents, synthesize results.
+
+```bash
+python3 examples/example2_multi_agent.py
+```
+
+### Example 3: Self-Correction & Learning
+Error logging, pattern detection, automatic rule promotion.
+
+```bash
+python3 examples/example3_self_correction.py
+```
+
+**Examples overview:** [`examples/README.md`](examples/README.md)
+
+---
+
+## Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   OpenClaudeClaw                        │
+├─────────────────────────────────────────────────────────┤
+│  ┌──────────────┐  ┌──────────────┐  ┌───────────────┐ │
+│  │   Runtime    │  │  Tool Pool   │  │    Context    │ │
+│  │  (Harness)   │  │  (42 tools)  │  │    Builder    │ │
+│  └──────┬───────┘  └──────┬───────┘  └───────┬───────┘ │
+│         │                 │                  │          │
+│  ┌──────┴─────────────────┴──────────────────┴──────┐  │
+│  │              Integration Layer                    │  │
+│  └──────┬─────────────────┬──────────────────┬──────┘  │
+│         │                 │                  │          │
+│  ┌──────┴──────┐  ┌───────┴───────┐  ┌──────┴──────┐  │
+│  │   Policy    │  │     State     │  │    Event    │  │
+│  │   Engine    │  │   Manager     │  │    Bus      │  │
+│  └─────────────┘  └───────────────┘  └─────────────┘  │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Deep dive:** [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+
+---
+
+## Performance Characteristics
+
+| Operation | Expected Latency |
+|-----------|------------------|
+| Import | ~0.6s |
+| Tool pool initialization | ~0.6s |
+| Simple tool execution | ~0.0–0.1s |
+| Complex tool execution | ~0.5–0.7s |
+| Context build (cached) | ~0ms |
+| Context build (fresh) | ~0.2s |
+
+---
+
+## Requirements
+
+- Python 3.10+
+- OpenClaw environment
+- Network access (for WebSearch, WebFetch, MCP tools)
+
+**Dependencies:** See `requirements.txt`
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-tool`)
+3. Implement your changes with tests
+4. Run the test suite (`python3 tests/test_all.py`)
+5. Commit your changes (`git commit -m 'Add new tool: X'`)
+6. Push to the branch (`git push origin feature/new-tool`)
+7. Open a Pull Request
+
+**Contribution guidelines:** Please ensure your code follows existing patterns and includes appropriate documentation.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Support
+
+- **Issues:** [GitHub Issues](https://github.com/ayzekhdawy/OpenClaudeClaw/issues)
+- **Community:** [OpenClaw Discord](https://discord.gg/clawd)
+- **Documentation:** See `docs/` directory
+
+---
+
 **Version:** 1.0.0  
-**Last Updated:** 2026-04-01
+**Release Date:** 2026-04-01  
+**Developer:** Ayzekdiolar
