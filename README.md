@@ -205,7 +205,6 @@ This project is licensed under the [MIT License](LICENSE).
 ## Support
 
 - **Issues:** [GitHub Issues](https://github.com/ayzekhdawy/OpenClaudeClaw/issues)
-- **Community:** [OpenClaw Discord](https://discord.gg/clawd)
 - **Documentation:** See `docs/` directory
 
 ---
