@@ -1,91 +1,91 @@
-# Demo 1: Cargo Fiyatı Araştırması
+# Demo 1: Cargo Price Research
 
-**Senaryo:** Flech markası için Yurtiçi ve Sürat kargo fiyatlarını karşılaştır.
+**Scenario:** Compare Yurtiçi and Sürat cargo prices for Flech brand.
 
 ```python
 from openclaudeclaw import HarnessRuntime, get_tool_pool
 from openclaudeclaw.context_builder import build_context
 
-# Runtime başlat
+# Initialize runtime
 runtime = HarnessRuntime()
 pool = get_tool_pool()
 
-# 1. Context oluştur (SOUL + MEMORY + USER otomatik yüklenir)
-ctx = build_context("Flech için cargo fiyatlarını araştır ve karşılaştır")
-print(f"Context hazır: {len(ctx.full_prompt)} chars")
+# 1. Build context (SOUL + MEMORY + USER auto-loaded)
+ctx = build_context("Research cargo prices for Flech and compare")
+print(f"Context ready: {len(ctx.full_prompt)} chars")
 
-# 2. Web araması yap
+# 2. Web search
 search_result = pool.execute("WebSearch", {
-    "query": "Yurtiçi kargo fiyatları 2026",
+    "query": "Yurtiçi cargo prices 2026",
     "count": 5
 })
-print(f"Yurtiçi sonuçları: {search_result.output[:300]}...")
+print(f"Yurtiçi results: {search_result.output[:300]}...")
 
 search_result = pool.execute("WebSearch", {
-    "query": "Sürat kargo fiyatları 2026",
+    "query": "Sürat cargo prices 2026",
     "count": 5
 })
-print(f"Sürat sonuçları: {search_result.output[:300]}...")
+print(f"Sürat results: {search_result.output[:300]}...")
 
-# 3. Web sayfalarını fetch et
+# 3. Fetch web pages
 if search_result.urls:
     fetch_result = pool.execute("WebFetch", {
         "url": search_result.urls[0]
     })
-    print(f"İçerik: {fetch_result.output[:500]}...")
+    print(f"Content: {fetch_result.output[:500]}...")
 
-# 4. Düşünce notu ekle
+# 4. Add thought note
 pool.execute("Think", {
-    "thought": "Yurtiçi cam ürünlerde %20 indirim yapıyor. Sürat daha pahalı ama hızlı."
+    "thought": "Yurtiçi offers 20% discount on glass products. Sürat is more expensive but faster."
 })
 
-# 5. Task oluştur
+# 5. Create task
 task = pool.execute("TaskCreate", {
-    "description": "Cargo firması seç ve İshak'a raporla",
+    "description": "Select cargo company and report to user",
     "priority": "high"
 })
 
-# 6. Brief ile kullanıcıya mesaj gönder
+# 6. Send brief message to user
 pool.execute("Brief", {
     "message": """
-**Cargo Karşılaştırma — Flech**
+**Cargo Comparison — Flech**
 
-| Firma | Fiyat | Süre | Cam Ürün |
-|-------|-------|------|----------|
-| Yurtiçi | 85 TL | 2-3 gün | %20 indirim |
-| Sürat | 95 TL | 1-2 gün | Standart |
+| Company | Price | Duration | Glass Products |
+|---------|-------|----------|----------------|
+| Yurtiçi | 85 TL | 2-3 days | 20% discount |
+| Sürat | 95 TL | 1-2 days | Standard |
 
-**Öneri:** Yurtiçi kargo (cam ürünlerde indirim).
+**Recommendation:** Yurtiçi cargo (discount on glass products).
 
-Detaylı analiz gerekli mi?
+Need detailed analysis?
 """,
     "status": "normal"
 })
 
-# 7. Task'ı tamamla
+# 7. Complete task
 pool.execute("TaskStop", {"task_id": task.task_id})
 
-print("\n✓ Demo tamamlandı!")
+print("\n✓ Demo completed!")
 ```
 
-## Çalıştırma
+## Running
 
 ```bash
 cd /home/ayzek/.openclaw/workspace/repos/OpenClaudeClaw
 python3 demos/demo1_cargo_research.py
 ```
 
-## Beklenen Çıktı
+## Expected Output
 
 ```
-Context hazır: 2828 chars
-Yurtiçi sonuçları: [5 sonuç listesi]...
-Sürat sonuçları: [5 sonuç listesi]...
-İçerik: [Sayfa içeriği]...
-✓ Demo tamamlandı!
+Context ready: 2828 chars
+Yurtiçi results: [5 results list]...
+Sürat results: [5 results list]...
+Content: [Page content]...
+✓ Demo completed!
 ```
 
 ---
 
-**Süre:** ~15 saniye  
-**Tool kullanımı:** WebSearch(2), WebFetch(1), Think(1), TaskCreate(1), Brief(1), TaskStop(1)
+**Duration:** ~15 seconds  
+**Tools used:** WebSearch(2), WebFetch(1), Think(1), TaskCreate(1), Brief(1), TaskStop(1)

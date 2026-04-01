@@ -1,6 +1,6 @@
 # Demo 3: REPL + Code Execution
 
-**Senaryo:** Interactive Python shell ile veri işleme.
+**Scenario:** Interactive Python shell for data processing.
 
 ```python
 from openclaudeclaw import HarnessRuntime, get_tool_pool
@@ -11,17 +11,17 @@ pool = get_tool_pool()
 
 print("=== Demo 3: REPL + Code Execution ===\n")
 
-# 1. REPL başlat
+# 1. Start REPL
 start = pool.execute("REPL", {"command": "start"})
 print(f"REPL: {start.output}")
 
-# 2. Veri işleme kodu çalıştır
+# 2. Run data processing code
 code1 = """
 import json
 data = {
-    "markalar": ["Urbica", "Flech", "Morecano"],
-    "ciro": [73000, 45000, 12000],
-    "ay": "Mart 2026"
+    "brands": ["Urbica", "Flech", "Morecano"],
+    "revenue": [73000, 45000, 12000],
+    "month": "March 2026"
 }
 print(json.dumps(data, indent=2, ensure_ascii=False))
 """
@@ -30,28 +30,28 @@ result = pool.execute("REPL", {
     "command": "eval",
     "code": code1
 })
-print(f"\nVeri işleme sonucu:\n{result.output}")
+print(f"\nData processing result:\n{result.output}")
 
-# 3. Hesaplama yap
+# 3. Run calculations
 code2 = """
-ciro = [73000, 45000, 12000]
-toplam = sum(ciro)
-ortalama = toplam / len(ciro)
-buyume = ((ciro[0] - ciro[1]) / ciro[1]) * 100
-print(f"Toplam ciro: {toplam:,.0f} TL")
-print(f"Ortalama: {ortalama:,.0f} TL")
-print(f"Urbica-Flech büyüme: %{buyume:.1f}")
+revenue = [73000, 45000, 12000]
+total = sum(revenue)
+average = total / len(revenue)
+growth = ((revenue[0] - revenue[1]) / revenue[1]) * 100
+print(f"Total revenue: {total:,.0f} TL")
+print(f"Average: {average:,.0f} TL")
+print(f"Urbica-Flech growth: %{growth:.1f}")
 """
 
 result = pool.execute("REPL", {
     "command": "eval",
     "code": code2
 })
-print(f"\nHesaplama:\n{result.output}")
+print(f"\nCalculation:\n{result.output}")
 
-# 4. Hata yakalama
+# 4. Error handling
 code3 = """
-# Kasıtlı hata
+# Intentional error
 x = 1 / 0
 """
 
@@ -59,46 +59,46 @@ result = pool.execute("REPL", {
     "command": "eval",
     "code": code3
 })
-print(f"\nHata durumu:\nSuccess: {result.success}\nError: {result.error or result.output}")
+print(f"\nError case:\nSuccess: {result.success}\nError: {result.error or result.output}")
 
-# 5. REPL history göster
+# 5. Show REPL history
 history = pool.execute("REPL", {"command": "history"})
 print(f"\n{history.output}")
 
-# 6. REPL durdur
+# 6. Stop REPL
 stop = pool.execute("REPL", {"command": "stop"})
 print(f"\nREPL: {stop.output}")
 
-print("\n✓ Demo 3 tamamlandı!")
+print("\n✓ Demo 3 completed!")
 ```
 
-## Çalıştırma
+## Running
 
 ```bash
 cd /home/ayzek/.openclaw/workspace/repos/OpenClaudeClaw
 python3 demos/demo3_repl.py
 ```
 
-## Beklenen Çıktı
+## Expected Output
 
 ```
 === Demo 3: REPL + Code Execution ===
 
 REPL: [REPL] Python REPL started...
 
-Veri işleme sonucu:
+Data processing result:
 {
-  "markalar": ["Urbica", "Flech", "Morecano"],
-  "ciro": [73000, 45000, 12000],
-  "ay": "Mart 2026"
+  "brands": ["Urbica", "Flech", "Morecano"],
+  "revenue": [73000, 45000, 12000],
+  "month": "March 2026"
 }
 
-Hesaplama:
-Toplam ciro: 130,000 TL
-Ortalama: 43,333 TL
-Urbica-Flech büyüme: %62.2
+Calculation:
+Total revenue: 130,000 TL
+Average: 43,333 TL
+Urbica-Flech growth: %62.2
 
-Hata durumu:
+Error case:
 Success: False
 Error: [ERROR] ... ZeroDivisionError ...
 
@@ -109,10 +109,10 @@ Last output: ...
 
 REPL: [REPL] Stopped. 3 executions.
 
-✓ Demo 3 tamamlandı!
+✓ Demo 3 completed!
 ```
 
 ---
 
-**Süre:** ~3 saniye  
-**Tool kullanımı:** REPL(5: start, eval x3, history, stop)
+**Duration:** ~3 seconds  
+**Tools used:** REPL(5: start, eval x3, history, stop)

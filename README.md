@@ -1,94 +1,94 @@
 # OpenClaudeClaw
 
-**OpenClaw için gelişmiş harness sistemi** — 42 tool, state management, context builder, policy engine.
+**Advanced harness system for OpenClaw** — 42 tools, state management, context builder, policy engine.
 
-## Özellikler
+## Features
 
-- **42 Tool** — Bash, Read, Write, Edit, Glob, Grep, LSP, REPL, Task, MCP, Plan Mode, Worktree ve daha fazlası
-- **Harness Context** — SOUL, MEMORY, USER otomatik birleştirme
-- **State Management** — `.harness/` dizininde persistent state
-- **Policy Engine** — Tool bazlı izinler + approval flow
-- **Cache Sistemi** — 60 saniye TTL ile hızlı context analizi
+- **42 Tools** — Bash, Read, Write, Edit, Glob, Grep, LSP, REPL, Task, MCP, Plan Mode, Worktree and more
+- **Harness Context** — Automatic SOUL, MEMORY, USER merging
+- **State Management** — Persistent state in `.harness/` directory
+- **Policy Engine** — Tool-based permissions + approval flow
+- **Cache System** — 60 second TTL for fast context analysis
 - **Event Bus** — Async event handling
 - **Agent Registry** — Sub-agent tracking + steering
-- **Skill Registry** — Wizard mode ile skill oluşturma
+- **Skill Registry** — Skill creation with wizard mode
 
-## Kurulum
+## Installation
 
 ```bash
-# OpenClaudeClaw kurulum sihirbazını çalıştır
+# Run OpenClaudeClaw installation wizard
 python3 install.py
 ```
 
-Kurulum sihirbazı size şunları sorar:
-- Hangi tool'ları kurmak istiyorsunuz? (Core/Extended/All)
-- State dizini neresi olsun? (varsayılan: `.harness/`)
-- Policy engine aktif olsun mu?
-- Cache sistemi aktif olsun mu?
+The installation wizard will ask you:
+- Which tools do you want to install? (Core/Extended/All)
+- Where should the state directory be? (default: `.harness/`)
+- Should Policy Engine be enabled?
+- Should Cache System be enabled?
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```python
 from openclaudeclaw import HarnessRuntime, get_tool_pool
 
-# Runtime oluştur
+# Create runtime
 runtime = HarnessRuntime()
 
-# Tool pool'a eriş
+# Access tool pool
 pool = get_tool_pool()
 
-# Tool çalıştır
-result = pool.execute("Bash", {"command": "echo 'Merhaba Dünya'"})
+# Run a tool
+result = pool.execute("Bash", {"command": "echo 'Hello World'"})
 print(result.output)
 
-# Context builder kullan
+# Use context builder
 from openclaudeclaw.context_builder import build_context
-ctx = build_context("Flech için cargo fiyatlarını araştır")
+ctx = build_context("Research cargo prices for Flech")
 print(ctx.full_prompt)
 ```
 
-## Tool Kategorileri
+## Tool Categories
 
 ### Core Tools (8)
-- `Bash` — Shell komutları çalıştır
-- `Read` — Dosya oku
-- `Write` — Dosya yaz
-- `Edit` — Dosya düzenle
-- `Glob` — Dosya ara (pattern)
-- `Grep` — İçerik ara
-- `Think` — Düşünce notu
-- `Task` — Task yönetimi
+- `Bash` — Run shell commands
+- `Read` — Read files
+- `Write` — Write files
+- `Edit` — Edit files
+- `Glob` — Find files (pattern)
+- `Grep` — Search content
+- `Think` — Thought notes
+- `Task` — Task management
 
 ### Extended Tools (19)
-- `TodoWrite` — Todo listesi
-- `WebFetch` — Web sayfası çek
-- `WebSearch` — Web araması
-- `Brief` — Kullanıcıya mesaj
-- `SendMessage` — Mesaj gönder
+- `TodoWrite` — Todo list management
+- `WebFetch` — Fetch web pages
+- `WebSearch` — Web search (Brave API)
+- `Brief` — Send message to user
+- `SendMessage` — Send message (webhook)
 - `TaskCreate/Get/Update/Stop` — Task CRUD
-- `AskUserQuestion` — Çoklu soru
-- `ToolSearch` — Tool ara
-- `Sleep` — Bekleme
-- `Config` — Konfigürasyon
-- `NotebookEdit` — Jupyter notebook düzenle
-- `ListMcpResources` — MCP server listesi
-- `ReadMcpResource` — MCP resource oku
-- `SyntheticOutput` — Şablon tabanlı çıktı
+- `AskUserQuestion` — Multi-question UI
+- `ToolSearch` — Search tools
+- `Sleep` — Wait (ms)
+- `Config` — Configuration read/write
+- `NotebookEdit` — Jupyter notebook editor
+- `ListMcpResources` — MCP server list
+- `ReadMcpResource` — MCP resource reader
+- `SyntheticOutput` — Template-based output
 
 ### Advanced Tools (15)
 - `LSP` — Code intelligence (goto definition, references, symbols)
 - `REPL` — Interactive Python shell
-- `EnterPlanMode/ExitPlanMode/UpdatePlan/PlanStatus` — Planlama sistemi
-- `EnterWorktree/ExitWorktree/WorktreeList` — Git worktree yönetimi
+- `EnterPlanMode/ExitPlanMode/UpdatePlan/PlanStatus` — Planning system
+- `EnterWorktree/ExitWorktree/WorktreeList` — Git worktree management
 - `Skill` — Skill registry + wizard mode
-- `AnswerQuestion` — Soru cevaplama
-- `Agent` — Sub-agent yönetimi
+- `AnswerQuestion` — Question answering
+- `Agent` — Sub-agent management
 - `Runtime` — Runtime status
-- `AnalyzeContext` — Context analizi + cache
+- `AnalyzeContext` — Context analysis + cache
 - `MCP` — MCP wrapper
-- `Schedule` — Cron job yönetimi
+- `Schedule` — Cron job management
 
-## Yapı
+## Project Structure
 
 ```
 openclaudeclaw/
@@ -98,44 +98,44 @@ openclaudeclaw/
 │       ├── runtime.py          # HarnessRuntime
 │       ├── tool_pool.py        # 42 tool registry
 │       ├── context_builder.py  # Context merge
-│       ├── policy_engine.py    # İzin sistemi
-│       ├── models.py           # Data modelleri
+│       ├── policy_engine.py    # Permission system
+│       ├── models.py           # Data models
 │       ├── state.py            # State management
 │       ├── event_bus.py        # Event handling
 │       ├── agent_registry.py   # Sub-agent tracking
 │       ├── skills.py           # Skill registry
 │       ├── schedule.py         # Cron store
-│       └── tools/              # 42 tool implementasyonu
+│       └── tools/              # 42 tool implementations
 │           ├── core_tools.py
 │           ├── extended_tools.py
 │           ├── advanced_tools.py
 │           └── ...
-├── install.py                  # Kurulum sihirbazı
+├── install.py                  # Installation wizard
 ├── README.md
 ├── LICENSE
 └── requirements.txt
 ```
 
-## Lisans
+## License
 
-MIT License — Detaylar için `LICENSE` dosyasına bakın.
+MIT License — See `LICENSE` file for details.
 
-## Katkıda Bulunma
+## Contributing
 
-1. Fork edin
-2. Feature branch oluşturun (`git checkout -b feature/yeni-ozellik`)
-3. Commit yapın (`git commit -m 'Yeni özellik eklendi'`)
-4. Push edin (`git push origin feature/yeni-ozellik`)
-5. Pull Request açın
+1. Fork the repo
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Open a Pull Request
 
-## Destek
+## Support
 
 - GitHub Issues: [Report bug or request feature]
-- Discord: [OpenClaw topluluğu]
-- Dokümantasyon: `docs/` dizini
+- Discord: [OpenClaw community]
+- Documentation: `docs/` directory
 
 ---
 
-**Geliştirici:** Ayzekdiolar  
-**Versiyon:** 1.0.0  
-**Son Güncelleme:** 2026-04-01
+**Developer:** Ayzekdiolar  
+**Version:** 1.0.0  
+**Last Updated:** 2026-04-01

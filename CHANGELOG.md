@@ -1,47 +1,47 @@
-# Sürüm 1.0.0 — İlk Yayın
+# Release v1.0.0 — Initial Release
 
-**Tarih:** 2026-04-01  
-**Geliştirici:** Ayzekdiolar
+**Date:** 2026-04-01  
+**Developer:** Ayzekdiolar
 
-## Yeni Özellikler
+## New Features
 
-### 42 Tool
+### 42 Tools
 - **Core (8):** Bash, Read, Write, Edit, Glob, Grep, Think, Task
 - **Extended (19):** TodoWrite, WebFetch, WebSearch, Brief, SendMessage, Task CRUD, AskUserQuestion, ToolSearch, Sleep, Config, NotebookEdit, MCP Resources, SyntheticOutput
-- **Advanced (15):** LSP, REPL, Plan Mode (4 tool), Worktree (3 tool), Skill, AnswerQuestion, Agent, Runtime, AnalyzeContext, MCP, Schedule
+- **Advanced (15):** LSP, REPL, Plan Mode (4 tools), Worktree (3 tools), Skill, AnswerQuestion, Agent, Runtime, AnalyzeContext, MCP, Schedule
 
-### Harness Sistemi
-- **Context Builder:** SOUL + MEMORY + USER otomatik birleştirme
-- **State Management:** `.harness/` dizininde persistent state
-- **Policy Engine:** Tool bazlı izinler + approval flow
-- **Cache:** 60 saniye TTL ile hızlı context analizi
+### Harness System
+- **Context Builder:** Automatic SOUL + MEMORY + USER merging
+- **State Management:** Persistent state in `.harness/` directory
+- **Policy Engine:** Tool-based permissions + approval flow
+- **Cache:** 60 second TTL for fast context analysis
 - **Event Bus:** Async event handling
 - **Agent Registry:** Sub-agent tracking + steering
-- **Skill Registry:** Wizard mode ile skill oluşturma
+- **Skill Registry:** Skill creation with wizard mode
 
-### Kurulum Sihirbazı
-- Seçmeli kurulum (Core/Extended/Advanced/Hepsi)
-- Otomatik state dizini yapılandırması
-- Policy engine konfigürasyonu
-- Cache sistemi ayarları
+### Installation Wizard
+- Selective installation (Core/Extended/Advanced/All)
+- Automatic state directory configuration
+- Policy engine configuration
+- Cache system settings
 
-### Dokümantasyon
-- README.md — Genel bakış
-- docs/USAGE.md — Detaylı kullanım kılavuzu
-- demos/ — 3 örnek workflow (cargo araştırma, plan mode, REPL)
+### Documentation
+- README.md — Overview
+- docs/USAGE.md — Detailed usage guide
+- demos/ — 3 example workflows (cargo research, plan mode, REPL)
 - tests/test_all.py — Test suite
 
-## Teknik Detaylar
+## Technical Details
 
 - **Python:** 3.10+
-- **Bağımlılıklar:** openclaudeclaw, pathlib, jsonschema, pyyaml
-- **Lisans:** MIT
-- **Boyut:** ~200 KB (source)
+- **Dependencies:** openclaudeclaw, pathlib, jsonschema, pyyaml
+- **License:** MIT
+- **Size:** ~200 KB (source)
 
-## Kurulum
+## Installation
 
 ```bash
-git clone https://github.com/ayzekdiolar/OpenClaudeClaw.git
+git clone https://github.com/ayzekhdawy/OpenClaudeClaw.git
 cd OpenClaudeClaw
 python3 install.py
 ```
@@ -54,7 +54,7 @@ python3 demos/demo2_plan_lsp.py
 python3 demos/demo3_repl.py
 ```
 
-## Test
+## Testing
 
 ```bash
 python3 tests/test_all.py
@@ -62,4 +62,4 @@ python3 tests/test_all.py
 
 ---
 
-**Not:** Bu sürüm Claude Code'dan esinlenilmiştir ama tamamen Python/OpenClaw için özgün olarak yazılmıştır.
+**Note:** This project is inspired by Claude Code but written entirely for Python/OpenClaw.

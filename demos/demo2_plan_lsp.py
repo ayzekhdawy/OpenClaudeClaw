@@ -1,6 +1,6 @@
-# Demo 2: Plan Mode + LSP Kullanımı
+# Demo 2: Plan Mode + LSP Usage
 
-**Senaryo:** Yeni bir Python projesine başla, plan oluştur, kod analizi yap.
+**Scenario:** Start a new Python project, create a plan, analyze code.
 
 ```python
 from openclaudeclaw import HarnessRuntime, get_tool_pool
@@ -10,33 +10,33 @@ pool = get_tool_pool()
 
 print("=== Demo 2: Plan Mode + LSP ===\n")
 
-# 1. Plan moduna gir
+# 1. Enter plan mode
 plan = pool.execute("EnterPlanMode", {
     "mode": "plan",
-    "description": "Python proje iskeleti oluştur"
+    "description": "Create Python project skeleton"
 })
 print(f"Plan mode: {plan.output}")
 
-# 2. Mevcut Python dosyalarını listele
+# 2. List existing Python files
 glob_result = pool.execute("Glob", {"pattern": "*.py"})
-print(f"\nPython dosyaları: {len(glob_result.output.splitlines())} adet")
+print(f"\nPython files: {len(glob_result.output.splitlines())} files")
 
-# 3. LSP ile symbol analizi yap
+# 3. LSP symbol analysis
 lsp_result = pool.execute("LSP", {
     "operation": "documentSymbol",
     "file_path": "src/openclaudeclaw/tool_pool.py"
 })
 symbols = [line.strip() for line in lsp_result.output.split('\n') if line.startswith('[')]
-print(f"\nTool pool symbols: {len(symbols)} adet")
+print(f"\nTool pool symbols: {len(symbols)} symbols")
 for sym in symbols[:5]:
     print(f"  • {sym}")
 
-# 4. Task'ları oluştur
+# 4. Create tasks
 tasks = [
-    ("Proje iskeleti oluştur", "high"),
-    ("Tool'ları yaz", "high"),
-    ("Testleri yaz", "medium"),
-    ("Dokümantasyon", "low"),
+    ("Create project skeleton", "high"),
+    ("Write tools", "high"),
+    ("Write tests", "medium"),
+    ("Documentation", "low"),
 ]
 
 for desc, priority in tasks:
@@ -44,67 +44,67 @@ for desc, priority in tasks:
         "description": desc,
         "priority": priority
     })
-    print(f"Task oluşturuldu: {desc} ({priority})")
+    print(f"Task created: {desc} ({priority})")
 
-# 5. Plan durumunu göster
+# 5. Show plan status
 status = pool.execute("PlanStatus", {})
 print(f"\n{status.output}")
 
-# 6. Todo listesi güncelle
+# 6. Update todo list
 pool.execute("TodoWrite", {
     "todos": [
-        {"content": "Proje iskeleti", "status": "completed"},
-        {"content": "Tool'ları yaz", "status": "in_progress"},
-        {"content": "Testleri yaz", "status": "pending"},
-        {"content": "Dokümantasyon", "status": "pending"},
+        {"content": "Project skeleton", "status": "completed"},
+        {"content": "Write tools", "status": "in_progress"},
+        {"content": "Write tests", "status": "pending"},
+        {"content": "Documentation", "status": "pending"},
     ]
 })
 
-# 7. Think ile not ekle
+# 7. Add thought note
 pool.execute("Think", {
-    "thought": "LSP analizi başarılı. 32 symbol bulundu. Tool pool yapısı Claude Code ile uyumlu."
+    "thought": "LSP analysis successful. 32 symbols found. Tool pool structure compatible with Claude Code."
 })
 
-# 8. Plan modundan çık (discard)
+# 8. Exit plan mode (discard)
 exit_plan = pool.execute("ExitPlanMode", {"action": "discard"})
 print(f"\nPlan mode: {exit_plan.output}")
 
-print("\n✓ Demo 2 tamamlandı!")
+print("\n✓ Demo 2 completed!")
 ```
 
-## Çalıştırma
+## Running
 
 ```bash
 cd /home/ayzek/.openclaw/workspace/repos/OpenClaudeClaw
 python3 demos/demo2_plan_lsp.py
 ```
 
-## Beklenen Çıktı
+## Expected Output
 
 ```
 === Demo 2: Plan Mode + LSP ===
 
-Plan mode: [PLAN MODE] Plan modu aktif...
+Plan mode: [PLAN MODE] Plan mode active...
 
-Python dosyaları: 45 adet
+Python files: 45 files
 
-Tool pool symbols: 32 adet
+Tool pool symbols: 32 symbols
   • [class] ToolPool @ line 380
   • [def] __init__ @ line 387
   ...
 
-Task oluşturuldu: Proje iskeleti oluştur (high)
-Task oluşturuldu: Tool'ları yaz (high)
+Task created: Create project skeleton (high)
+Task created: Write tools (high)
 ...
 
-[PLAN] 4 task, 1 plan aktif...
+[PLAN] 4 tasks, 1 plan active...
 
-Plan mode: [PLAN MODE] Plan modu kapatıldı.
+Plan mode: [PLAN MODE] Plan mode closed.
 
-✓ Demo 2 tamamlandı!
+✓ Demo 2 completed!
 ```
 
 ---
 
-**Süre:** ~5 saniye  
-**Tool kullanımı:** EnterPlanMode(1), Glob(1), LSP(1), TaskCreate(4), PlanStatus(1), TodoWrite(1), Think(1), ExitPlanMode(1)
+**Duration:** ~5 seconds  
+**Tools used:** EnterPlanMode(1), Glob(1), LSP(1), TaskCreate(4), PlanStatus(1), TodoWrite(1), Think(1), ExitPlanMode(1)

@@ -1,42 +1,42 @@
-# OpenClaudeClaw Dokümantasyonu
+# OpenClaudeClaw Documentation
 
-## Kurulum
+## Installation
 
-1. Repoyu klonlayın:
+1. Clone the repository:
 ```bash
-git clone https://github.com/ayzekdiolar/OpenClaudeClaw.git
+git clone https://github.com/ayzekhdawy/OpenClaudeClaw.git
 cd OpenClaudeClaw
 ```
 
-2. Kurulum sihirbazını çalıştırın:
+2. Run the installation wizard:
 ```bash
 python3 install.py
 ```
 
-3. Sihirbaz size şunları sorar:
-   - Hangi tool paketlerini kurmak istiyorsunuz? (Core/Extended/Advanced/Hepsi)
-   - State dizini neresi olsun?
-   - Policy Engine aktif olsun mu?
-   - Cache sistemi aktif olsun mu?
+3. The wizard will ask you:
+   - Which tool packages do you want to install? (Core/Extended/Advanced/All)
+   - Where should the state directory be?
+   - Should Policy Engine be enabled?
+   - Should Cache System be enabled?
 
-## Hızlı Başlangıç
+## Quick Start
 
-### Temel Kullanım
+### Basic Usage
 
 ```python
 from openclaudeclaw import HarnessRuntime, get_tool_pool
 
-# Runtime oluştur
+# Create runtime
 runtime = HarnessRuntime()
 
-# Tool pool'a eriş
+# Access tool pool
 pool = get_tool_pool()
 
-# Bash komutu çalıştır
+# Run a bash command
 result = pool.execute("Bash", {"command": "ls -la"})
 print(result.output)
 
-# Dosya oku
+# Read a file
 result = pool.execute("Read", {"path": "README.md"})
 print(result.output[:500])
 ```
@@ -46,66 +46,66 @@ print(result.output[:500])
 ```python
 from openclaudeclaw.context_builder import build_context
 
-# Görev için context oluştur
-ctx = build_context("Flech için cargo fiyatlarını araştır")
+# Build context for a task
+ctx = build_context("Research cargo prices for Flech")
 
-# Tüm context'i tek prompt olarak al
+# Get full prompt
 print(ctx.full_prompt)
 
-# Bileşenlere eriş
-print(ctx.persona)      # SOUL.md içeriği
-print(ctx.user)         # USER.md içeriği
-print(ctx.memory)       # MEMORY.md içeriği
-print(ctx.task_context) # Göreve özel context
+# Access components
+print(ctx.persona)      # SOUL.md content
+print(ctx.user)         # USER.md content
+print(ctx.memory)       # MEMORY.md content
+print(ctx.task_context) # Task-specific context
 ```
 
-### Task Yönetimi
+### Task Management
 
 ```python
-# Yeni task oluştur
+# Create a new task
 task = pool.execute("TaskCreate", {
-    "description": "Cargo fiyatlarını karşılaştır",
+    "description": "Compare cargo prices",
     "priority": "high"
 })
 
-# Task'ı güncelle
+# Update task
 pool.execute("TaskUpdate", {
     "task_id": task.task_id,
     "status": "in_progress"
 })
 
-# Task'ı tamamla
+# Complete task
 pool.execute("TaskStop", {"task_id": task.task_id})
 ```
 
 ### Plan Mode
 
 ```python
-# Plan moduna gir
+# Enter plan mode
 pool.execute("EnterPlanMode", {
     "mode": "plan",
-    "description": "Cargo araştırma planı"
+    "description": "Cargo research plan"
 })
 
-# Plan durumunu kontrol et
+# Check plan status
 result = pool.execute("PlanStatus", {})
 print(result.output)
 
-# Plan modundan çık
+# Exit plan mode
 pool.execute("ExitPlanMode", {"action": "discard"})
 ```
 
 ### LSP (Code Intelligence)
 
 ```python
-# Symbol listesi al
+# Get symbol list
 result = pool.execute("LSP", {
     "operation": "documentSymbol",
     "file_path": "src/openclaudeclaw/tool_pool.py"
 })
 print(result.output)
 
-# Definition'a git
+# Go to definition
 result = pool.execute("LSP", {
     "operation": "goToDefinition",
     "file_path": "src/openclaudeclaw/tool_pool.py",
@@ -117,83 +117,83 @@ result = pool.execute("LSP", {
 ### REPL (Interactive Python)
 
 ```python
-# REPL başlat
+# Start REPL
 pool.execute("REPL", {"command": "start"})
 
-# Kod çalıştır
+# Run code
 result = pool.execute("REPL", {
     "command": "eval",
     "code": "import json; print(json.dumps({'status': 'ok'}))"
 })
 print(result.output)
 
-# REPL durdur
+# Stop REPL
 pool.execute("REPL", {"command": "stop"})
 ```
 
-## Tool Referansı
+## Tool Reference
 
 ### Core Tools (8)
 
-| Tool | Açıklama | Input |
-|------|----------|-------|
-| `Bash` | Shell komutu çalıştır | `{"command": "ls -la", "cwd": "/path", "timeout": 30}` |
-| `Read` | Dosya oku | `{"path": "file.txt", "offset": 0, "limit": 100}` |
-| `Write` | Dosya yaz | `{"path": "file.txt", "content": "..."}` |
-| `Edit` | Dosya düzenle | `{"path": "file.txt", "old_text": "...", "new_text": "..."}` |
-| `Glob` | Pattern ile dosya ara | `{"pattern": "*.py"}` |
-| `Grep` | İçerik ara | `{"pattern": "class ", "path": "src/"}` |
-| `Think` | Düşünce notu | `{"thought": "Bu görev için..."}` |
-| `Task` | Task yönetimi | `{"description": "...", "priority": "high"}` |
+| Tool | Description | Input |
+|------|-------------|-------|
+| `Bash` | Run shell command | `{"command": "ls -la", "cwd": "/path", "timeout": 30}` |
+| `Read` | Read file | `{"path": "file.txt", "offset": 0, "limit": 100}` |
+| `Write` | Write file | `{"path": "file.txt", "content": "..."}` |
+| `Edit` | Edit file | `{"path": "file.txt", "old_text": "...", "new_text": "..."}` |
+| `Glob` | Find files (pattern) | `{"pattern": "*.py"}` |
+| `Grep` | Search content | `{"pattern": "class ", "path": "src/"}` |
+| `Think` | Thought note | `{"thought": "For this task..."}` |
+| `Task` | Task management | `{"description": "...", "priority": "high"}` |
 
 ### Extended Tools (19)
 
-| Tool | Açıklama |
-|------|----------|
-| `TodoWrite` | Todo listesi yönetimi |
-| `WebFetch` | Web sayfası çek |
-| `WebSearch` | Web araması (Brave API) |
-| `Brief` | Kullanıcıya mesaj gönder |
-| `SendMessage` | Mesaj gönder (webhook) |
-| `TaskCreate` | Yeni task oluştur |
-| `TaskGet` | Task getir |
-| `TaskUpdate` | Task güncelle |
-| `TaskStop` | Task durdur |
-| `AskUserQuestion` | Çoklu soru sor |
-| `ToolSearch` | Tool ara |
-| `Sleep` | Bekleme (ms) |
-| `Config` | Konfigürasyon oku/yaz |
-| `NotebookEdit` | Jupyter notebook düzenle |
-| `ListMcpResources` | MCP server listesi |
-| `ReadMcpResource` | MCP resource oku |
-| `SyntheticOutput` | Şablon tabanlı çıktı |
+| Tool | Description |
+|------|-------------|
+| `TodoWrite` | Todo list management |
+| `WebFetch` | Fetch web page |
+| `WebSearch` | Web search (Brave API) |
+| `Brief` | Send message to user |
+| `SendMessage` | Send message (webhook) |
+| `TaskCreate` | Create new task |
+| `TaskGet` | Get task |
+| `TaskUpdate` | Update task |
+| `TaskStop` | Stop task |
+| `AskUserQuestion` | Multi-question UI |
+| `ToolSearch` | Search tools |
+| `Sleep` | Wait (ms) |
+| `Config` | Configuration read/write |
+| `NotebookEdit` | Jupyter notebook editor |
+| `ListMcpResources` | MCP server list |
+| `ReadMcpResource` | MCP resource reader |
+| `SyntheticOutput` | Template-based output |
 
 ### Advanced Tools (15)
 
-| Tool | Açıklama |
-|------|----------|
+| Tool | Description |
+|------|-------------|
 | `LSP` | Code intelligence (AST-based) |
 | `REPL` | Interactive Python shell |
-| `EnterPlanMode` | Plan moduna gir |
-| `ExitPlanMode` | Plan modundan çık |
-| `UpdatePlan` | Plan güncelle |
-| `PlanStatus` | Plan durumu |
-| `EnterWorktree` | Git worktree oluştur/aç |
-| `ExitWorktree` | Worktree'den çık |
-| `WorktreeList` | Worktree listesi |
+| `EnterPlanMode` | Enter plan mode |
+| `ExitPlanMode` | Exit plan mode |
+| `UpdatePlan` | Update plan |
+| `PlanStatus` | Plan status |
+| `EnterWorktree` | Create/open Git worktree |
+| `ExitWorktree` | Exit worktree |
+| `WorktreeList` | Worktree list |
 | `Skill` | Skill registry + wizard |
-| `AnswerQuestion` | Soru cevapla |
-| `Agent` | Sub-agent yönetimi |
+| `AnswerQuestion` | Answer question |
+| `Agent` | Sub-agent management |
 | `Runtime` | Runtime status |
-| `AnalyzeContext` | Context analizi + cache |
+| `AnalyzeContext` | Context analysis + cache |
 | `MCP` | MCP wrapper |
-| `Schedule` | Cron job yönetimi |
+| `Schedule` | Cron job management |
 
-## Yapılandırma
+## Configuration
 
 ### Environment Variables
 
-`.openclaudeclaw.env` dosyasında tanımlanır:
+Defined in `.openclaudeclaw.env`:
 
 ```bash
 OPENCLAUDECLAW_VERSION=1.0.0
@@ -206,7 +206,7 @@ LOG_LEVEL=INFO
 
 ### Policy Engine
 
-`.harness/permissions.json` — Tool bazlı izinler:
+`.harness/permissions.json` — Tool-based permissions:
 
 ```json
 {
@@ -216,7 +216,7 @@ LOG_LEVEL=INFO
 }
 ```
 
-### Cache Sistemi
+### Cache System
 
 `.harness/cache_config.json`:
 
@@ -230,7 +230,7 @@ LOG_LEVEL=INFO
 
 ## State Management
 
-State dosyaları `.harness/` dizininde saklanır:
+State files are stored in `.harness/` directory:
 
 - `tasks.json` — Task state
 - `plan_state.json` — Plan mode state
@@ -238,15 +238,15 @@ State dosyaları `.harness/` dizininde saklanır:
 - `repl_state.json` — REPL state
 - `todo_state.json` — Todo state
 - `permissions.json` — Policy permissions
-- `cache_config.json` — Cache ayarları
+- `cache_config.json` — Cache settings
 
-## Test
+## Testing
 
 ```bash
-# Tüm testleri çalıştır
+# Run all tests
 pytest tests/
 
-# Tek tool testi
+# Single tool test
 python3 -c "
 from openclaudeclaw import get_tool_pool
 pool = get_tool_pool()
@@ -255,22 +255,22 @@ print('OK' if r.success else 'FAIL')
 "
 ```
 
-## SSS
+## FAQ
 
-**S: OpenClaw ile nasıl entegre olur?**
-A: OpenClaudeClaw, OpenClaw üzerinde çalışır. `openclaw.json` konfigürasyonuna harness path'i ekleyin.
+**Q: How does it integrate with OpenClaw?**
+A: OpenClaudeClaw runs on top of OpenClaw. Add harness path to `openclaw.json` configuration.
 
-**S: Claude Code ile aynı mı?**
-A: Claude Code'dan esinlenilmiştir ama tamamen Python/OpenClaw için yazılmıştır.
+**Q: Is it the same as Claude Code?**
+A: It's inspired by Claude Code but written entirely for Python/OpenClaw.
 
-**S: 42 tool'un hepsi gerekli mi?**
-A: Hayır. Kurulum sihirbazı ile sadece ihtiyacınız olanları seçebilirsiniz.
+**Q: Are all 42 tools necessary?**
+A: No. The installation wizard lets you select only what you need.
 
-**S: Cache ne işe yarar?**
-A: Context analizini 60 saniye boyunca cache'ler. Aynı query için 0ms yanıt süresi.
+**Q: What does the cache do?**
+A: Caches context analysis for 60 seconds. Same query returns in 0ms.
 
 ---
 
-**Geliştirici:** Ayzekdiolar  
-**Versiyon:** 1.0.0  
-**Lisans:** MIT
+**Developer:** Ayzekdiolar  
+**Version:** 1.0.0  
+**License:** MIT

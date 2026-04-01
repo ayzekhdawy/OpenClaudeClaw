@@ -1,36 +1,36 @@
-# OpenClaudeClaw — Yayınlanacak Repo
+# OpenClaudeClaw — Release Notes
 
-**Geliştirici:** Ayzekdiolar  
-**Lisans:** MIT  
-**Versiyon:** 1.0.0
+**Developer:** Ayzekdiolar  
+**License:** MIT  
+**Version:** 1.0.0
 
-## Repo İçeriği
+## Repository Contents
 
-| Dizin | Açıklama | Dosya Sayısı |
-|-------|----------|--------------|
-| `src/openclaudeclaw/` | Ana paket (harness sistemi) | 45 modül |
-| `src/openclaudeclaw/tools/` | 42 tool implementasyonu | 16 dosya |
-| `demos/` | Örnek workflow'lar | 3 demo |
-| `tests/` | Test suite | 1 test dosyası |
-| `docs/` | Dokümantasyon | USAGE.md |
-| `install.py` | Kurulum sihirbazı | 1 dosya |
+| Directory | Description | File Count |
+|-----------|-------------|------------|
+| `src/openclaudeclaw/` | Main package (harness system) | 45 modules |
+| `src/openclaudeclaw/tools/` | 42 tool implementations | 16 files |
+| `demos/` | Example workflows | 3 demos |
+| `tests/` | Test suite | 1 test file |
+| `docs/` | Documentation | USAGE.md |
+| `install.py` | Installation wizard | 1 file |
 
-## İstatistikler
+## Statistics
 
-- **Toplam dosya:** 68
-- **Python kodu:** ~13,656 satır
-- **Tool sayısı:** 42
-- **Boyut:** ~656 KB
+- **Total files:** 68
+- **Python code:** ~13,656 lines
+- **Tool count:** 42
+- **Size:** ~656 KB
 
-## Kurulum
+## Installation
 
 ```bash
-git clone https://github.com/ayzekdiolar/OpenClaudeClaw.git
+git clone https://github.com/ayzekhdawy/OpenClaudeClaw.git
 cd OpenClaudeClaw
 python3 install.py
 ```
 
-## Demo Çalıştırma
+## Running Demos
 
 ```bash
 python3 demos/demo1_cargo_research.py
@@ -38,34 +38,34 @@ python3 demos/demo2_plan_lsp.py
 python3 demos/demo3_repl.py
 ```
 
-## Test
+## Testing
 
 ```bash
 python3 tests/test_all.py
 ```
 
-## Özellikler
+## Features
 
-✓ 42 Tool (Core + Extended + Advanced)  
+✓ 42 Tools (Core + Extended + Advanced)  
 ✓ Harness Context Builder  
 ✓ State Management  
 ✓ Policy Engine  
-✓ Cache Sistemi (60s TTL)  
+✓ Cache System (60s TTL)  
 ✓ Event Bus  
 ✓ Agent Registry  
 ✓ Skill Registry  
-✓ Kurulum Sihirbazı (seçmeli kurulum)  
+✓ Installation Wizard (selective install)  
 
-## Kişisel Bilgi Yok
+## No Personal Information
 
-Bu repo:
-- ✗ İshak'ın adını içermez
-- ✗ Urbica/Flech/Morecano markalarını içermez
-- ✗ Kişisel notları içermez
-- ✗ Özel dosya yollarını içermez
-- ✓ Sadece "Ayzekdiolar" geliştirici adını içerir
-- ✓ Genel kullanım için hazırlanmıştır
+This repository:
+- ✗ Does not contain personal names
+- ✗ Does not contain brand names (Urbica/Flech/Morecano)
+- ✗ Does not contain personal notes
+- ✗ Does not contain private file paths
+- ✓ Only contains "Ayzekdiolar" as developer name
+- ✓ Ready for general public use
 
 ---
 
-**Yayına hazır.**
+**Ready for release.**

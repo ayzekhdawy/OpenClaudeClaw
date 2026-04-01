@@ -1,42 +1,42 @@
-# OpenClaudeClaw — Proje Özeti
+# OpenClaudeClaw — Project Summary
 
-## Ne Bu?
+## What Is This?
 
-OpenClaw için gelişmiş harness sistemi. Claude Code'dan esinlenilmiştir ama tamamen Python/OpenClaw için özgün olarak yazılmıştır.
+Advanced harness system for OpenClaw. Inspired by Claude Code but written entirely for Python/OpenClaw.
 
-## Özellikler
+## Features
 
-- **42 Tool** — Core, Extended, Advanced kategorilerinde
-- **Harness Context** — SOUL + MEMORY + USER otomatik birleştirme
-- **State Management** — Persistent state (.harness/ dizini)
-- **Policy Engine** — Tool bazlı izinler
+- **42 Tools** — Core, Extended, Advanced categories
+- **Harness Context** — Automatic SOUL + MEMORY + USER merging
+- **State Management** — Persistent state (`.harness/` directory)
+- **Policy Engine** — Tool-based permissions
 - **Cache** — 60s TTL
 - **Event Bus** — Async event handling
 - **Agent Registry** — Sub-agent tracking
 
-## Yapı
+## Structure
 
 ```
 OpenClaudeClaw/
-├── src/openclaudeclaw/    # Ana paket (45 modül)
-│   ├── tools/             # 42 tool implementasyonu
+├── src/openclaudeclaw/    # Main package (45 modules)
+│   ├── tools/             # 42 tool implementations
 │   ├── runtime.py         # HarnessRuntime
 │   ├── tool_pool.py       # Tool registry
 │   ├── context_builder.py # Context merge
 │   └── ...
-├── install.py             # Kurulum sihirbazı
-├── demos/                 # 3 örnek workflow
+├── install.py             # Installation wizard
+├── demos/                 # 3 example workflows
 ├── tests/                 # Test suite
-├── docs/                  # Dokümantasyon
+├── docs/                  # Documentation
 ├── README.md
 ├── LICENSE                # MIT
 └── requirements.txt
 ```
 
-## Kurulum
+## Installation
 
 ```bash
-git clone https://github.com/ayzekdiolar/OpenClaudeClaw.git
+git clone https://github.com/ayzekhdawy/OpenClaudeClaw.git
 cd OpenClaudeClaw
 python3 install.py
 ```
@@ -44,30 +44,30 @@ python3 install.py
 ## Demo
 
 ```bash
-python3 demos/demo1_cargo_research.py  # Cargo araştırma
+python3 demos/demo1_cargo_research.py  # Cargo research
 python3 demos/demo2_plan_lsp.py        # Plan mode + LSP
 python3 demos/demo3_repl.py            # REPL execution
 ```
 
-## Test
+## Testing
 
 ```bash
 python3 tests/test_all.py
 ```
 
-## İstatistikler
+## Statistics
 
-- **Toplam dosya:** 68
-- **Python modülü:** 45 (src/) + 16 (tools/)
-- **Tool sayısı:** 42
-- **Dokümantasyon:** 3 MD dosyası
-- **Demo:** 3 adet
+- **Total files:** 68
+- **Python modules:** 45 (src/) + 16 (tools/)
+- **Tool count:** 42
+- **Documentation:** 3 MD files
+- **Demo:** 3 files
 - **Test:** 1 suite
 
-## Lisans
+## License
 
 MIT — Ayzekdiolar (2026)
 
 ---
 
-**Not:** Hiçbir kişisel bilgi içermez. Tamamen genel kullanım için.
+**Note:** No personal information included. Ready for general use.
