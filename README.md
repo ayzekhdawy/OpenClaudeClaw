@@ -13,7 +13,7 @@ OpenClaudeClaw is a production-ready harness system for OpenClaw, providing 42 t
 ## What It Provides
 
 - **42 Production Tools** — File operations, web search, LSP code intelligence, REPL, Git worktrees, MCP integration
-- **5-Step Reasoning Chain** — Dalio-based decision framework (Define → Decompose → Research → Synthesize → Validate)
+- **5-Step Reasoning Chain** — Dalio-based decision framework (Define → Decompose → Research → Synthesize → Validate → Execute)
 - **Multi-Agent Orchestration** — Coordinate coding agents, research agents, and workflow executors
 - **Self-Evolution System** — Automatic error logging, pattern detection, behavioral updates
 - **Context Management** — Intelligent merging of persona, memory, and user context
@@ -54,12 +54,12 @@ result = pool.execute("Bash", {"command": "ls -la"})
 print(result.output)
 ```
 
-### Advanced Reasoning (Esra Runtime)
+### Advanced Reasoning (5-Step Chain)
 
 ```python
-from openclaudeclaw.esra_runtime import create_esra_runtime
+from openclaudeclaw.advanced_reasoning import AdvancedReasoningRuntime
 
-runtime = create_esra_runtime()
+runtime = AdvancedReasoningRuntime()
 result = runtime.execute_with_reasoning(
     "Research cargo prices for glass products in Turkey"
 )

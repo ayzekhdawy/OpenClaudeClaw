@@ -13,7 +13,7 @@ Demonstrates: WebSearch, WebFetch, Think, Task, Brief, Reasoning Chain
 """
 
 from openclaudeclaw import HarnessRuntime
-from openclaudeclaw.esra_runtime import create_esra_runtime
+from openclaudeclaw.advanced_reasoning import create_reasoning_runtime
 from openclaudeclaw.context_builder import build_context
 
 
@@ -23,7 +23,7 @@ def main():
     print("=" * 60)
     
     # Initialize runtime
-    runtime = create_esra_runtime()
+    runtime = create_reasoning_runtime()
     
     # Task description
     task = "Research cargo prices for glass products (Flech brand). Compare Yurtiçi and Sürat kargo."

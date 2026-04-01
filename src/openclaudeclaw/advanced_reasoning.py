@@ -1,9 +1,9 @@
-# Esra Runtime — Advanced Reasoning Layer
+# Advanced Reasoning Runtime
 
 ```python
 """
-EsraRuntime — Advanced reasoning layer for OpenClaudeClaw
-──────────────────────────────────────────────────────────
+AdvancedReasoningRuntime — Advanced reasoning layer for OpenClaudeClaw
+────────────────────────────────────────────────────────────────────────
 Implements 5-step reasoning chain + self-evolution.
 """
 
@@ -32,7 +32,7 @@ class TaskResult:
     learnings_created: int
 
 
-class EsraRuntime(HarnessRuntime):
+class AdvancedReasoningRuntime(HarnessRuntime):
     """
     Extended runtime with advanced reasoning and self-evolution.
     
@@ -308,6 +308,6 @@ PLAN READY FOR EXECUTION: {'YES' if checklist_results else 'NO'}
         return [{"tool": "Bash", "input": {"command": "echo test"}}]  # Placeholder
 
 
-def create_esra_runtime() -> EsraRuntime:
-    """Factory function to create EsraRuntime instance."""
-    return EsraRuntime()
+def create_reasoning_runtime() -> AdvancedReasoningRuntime:
+    """Factory function to create AdvancedReasoningRuntime instance."""
+    return AdvancedReasoningRuntime()
